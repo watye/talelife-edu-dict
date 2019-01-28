@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talelife.edu.dict.dao.DictMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="resultMap" type="com.talelife.edu.dict.dao.entity.Dict">
+        <result property="dictId" column="dict_id"/>
+        <result property="dictName" column="dict_name"/>
+        <result property="usaPronounceUrl" column="usa_pronounce_url"/>
+        <result property="ukPronounceUrl" column="uk_pronounce_url"/>
+	</resultMap>
+
+  <sql id="baseColumns">
+  	<trim suffixOverrides=","> 
+        dict_id,
+        dict_name,
+        usa_pronounce_url,
+        uk_pronounce_url,
+  	</trim>
+  </sql>
+  
+  <sql id="whereSql">
+		<if test="dictId != null">
+			and dict_id = #{dictId}
+		</if>
+		<if test="dictName != null">
+			and dict_name = #{dictName}
+		</if>
+		<if test="usaPronounceUrl != null">
+			and usa_pronounce_url = #{usaPronounceUrl}
+		</if>
+		<if test="ukPronounceUrl != null">
+			and uk_pronounce_url = #{ukPronounceUrl}
+		</if>
+  </sql>
+  
+  	<select id="getById" resultMap="resultMap">
+		select <include refid="baseColumns"/>
+		from t_dict
+		   where dict_id = #{dictId}
+					</select>
+	
+	<select id="getByIds" resultMap="resultMap">
+	     select <include refid="baseColumns"/> from t_dict
+		      where dict_id in
+					     <foreach collection="ids" item="id" index="index"  open="(" close=")" separator=",">
+               #{id}
+         </foreach>  
+	</select>
+
+	<select id="get" resultMap="resultMap" parameterType="com.talelife.edu.dict.dao.entity.Dict">
+		select <include refid="baseColumns"/> from
+         t_dict  where 1=1 <include refid="whereSql"/> limit 1
+	</select>
+	
+	<select id="findAllList" resultMap="resultMap">
+	     select <include refid="baseColumns"/> from t_dict
+	</select>
+
+	<select id="findList"  parameterType="com.talelife.edu.dict.dao.entity.Dict" resultMap="resultMap">
+	     select <include refid="baseColumns"/> from t_dict where 1=1 <include refid="whereSql"/>
+	</select>
+
+	 <select id="getCount"  parameterType="com.talelife.edu.dict.dao.entity.Dict" resultType="java.lang.Integer">
+         select count(1) from t_dict where 1=1 <include refid="whereSql"/>
+      </select>
+
+      <insert id="save" parameterType="com.talelife.edu.dict.dao.entity.Dict">
+       insert into t_dict (
+		<trim suffixOverrides=","> 
+				<if test="dictId != null">
+				dict_id,
+			</if>
+				<if test="dictName != null">
+				dict_name,
+			</if>
+				<if test="usaPronounceUrl != null">
+				usa_pronounce_url,
+			</if>
+				<if test="ukPronounceUrl != null">
+				uk_pronounce_url,
+			</if>
+			</trim>
+		) values (
+		<trim suffixOverrides=",">
+				<if test="dictId != null">
+				#{dictId},
+			</if>
+				<if test="dictName != null">
+				#{dictName},
+			</if>
+				<if test="usaPronounceUrl != null">
+				#{usaPronounceUrl},
+			</if>
+				<if test="ukPronounceUrl != null">
+				#{ukPronounceUrl},
+			</if>
+			</trim>
+	)
+    </insert>
+    
+    <update id="updateById" parameterType="com.talelife.edu.dict.dao.entity.Dict">
+	    update t_dict  set
+	     <trim suffixOverrides="," >
+									<if test="dictName != null">
+				dict_name = #{dictName},
+			</if>
+								<if test="usaPronounceUrl != null">
+				usa_pronounce_url = #{usaPronounceUrl},
+			</if>
+								<if test="ukPronounceUrl != null">
+				uk_pronounce_url = #{ukPronounceUrl},
+			</if>
+					  </trim>
+			 where dict_id = #{dictId}
+					</update>
+
+	 <update id="updateByIds" parameterType="com.talelife.edu.dict.dao.entity.Dict">
+          update t_dict  set
+	     <trim suffixOverrides="," >
+									<if test="dictName != null">
+				dict_name = #{dictName},
+			</if>
+								<if test="usaPronounceUrl != null">
+				usa_pronounce_url = #{usaPronounceUrl},
+			</if>
+								<if test="ukPronounceUrl != null">
+				uk_pronounce_url = #{ukPronounceUrl},
+			</if>
+					  </trim>
+			 where dict_id in
+		  <foreach collection="ids" item="item" index="index"  open="(" close=")" separator=",">
+               #{item}
+         </foreach>
+					</update>
+	
+	<delete id="deleteById">
+        delete from t_dict 
+	         where dict_id = #{dictId}
+				    </delete>
+    
+     <delete id="deleteByIds">
+        delete from t_dict 
+	         where dict_id in 
+				        <foreach collection="array" item="item" index="index"  open="(" close=")" separator=",">
+               #{item}
+        </foreach>  
+	</delete>
+
+   <delete id="deleteByListId">
+        delete from t_dict 
+	         where dict_id in
+				        <foreach collection="list" item="item" index="index"  open="(" close=")" separator=",">
+               #{item}
+        </foreach>
+	</delete>
+    
+    <delete id="delete" parameterType="com.talelife.edu.dict.dao.entity.Dict">
+        delete from t_dict where 1=1 <include refid="whereSql"/> 
+    </delete>
+</mapper>

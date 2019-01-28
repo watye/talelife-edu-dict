@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: talelife-edu-dict-web
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: admin01
+Implementation-Vendor-Id: com.talelife
+Build-Jdk: 1.8.0_112
+Implementation-URL: http://www.talelife.com
+Created-By: Maven Integration for Eclipse
+
