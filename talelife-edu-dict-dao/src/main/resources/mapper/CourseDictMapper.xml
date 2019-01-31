@@ -114,7 +114,18 @@
 					  </trim>
 			 where id = #{id}
 					</update>
-
+	<update id="updateByDictId" parameterType="com.talelife.edu.dict.dao.entity.CourseDict">
+	    update t_course_dict  set
+	     <trim suffixOverrides="," >
+									<if test="courseId != null">
+				course_id = #{courseId},
+			</if>
+				<if test="sort != null">
+				sort = #{sort},
+			</if>
+					  </trim>
+			 where dict_id = #{dictId}
+					</update>
 	 <update id="updateByIds" parameterType="com.talelife.edu.dict.dao.entity.CourseDict">
           update t_course_dict  set
 	     <trim suffixOverrides="," >

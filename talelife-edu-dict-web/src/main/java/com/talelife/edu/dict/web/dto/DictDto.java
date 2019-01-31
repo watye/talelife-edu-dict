@@ -26,6 +26,14 @@ public class DictDto implements Serializable{
 	@ApiModelProperty(value = "单词")
 	private String dictName;
 	/**
+	 * 美式音标
+	 */
+	private String usaSoundmark;
+	/**
+	 * 英式音标
+	 */
+	private String ukSoundmark;
+	/**
 	 * 美式发音地址
 	 */
 	@ApiModelProperty(value = "美式发音地址")
@@ -35,9 +43,50 @@ public class DictDto implements Serializable{
 	 */
 	@ApiModelProperty(value = "英式发音地址")
 	private String ukPronounceUrl;
-
+	/**
+	 * 中文意思
+	 */
+	private String chineseMeaning;
+	/**
+	 * 分类id
+	 */
+	private Long courseId;
+	/**
+	 * 序号
+	 */
+	private Integer sort;
+	public String getUsaSoundmark() {
+		return usaSoundmark;
+	}
+	public void setUsaSoundmark(String usaSoundmark) {
+		this.usaSoundmark = usaSoundmark;
+	}
+	public String getUkSoundmark() {
+		return ukSoundmark;
+	}
+	public void setUkSoundmark(String ukSoundmark) {
+		this.ukSoundmark = ukSoundmark;
+	}
+	public String getChineseMeaning() {
+		return chineseMeaning;
+	}
+	public void setChineseMeaning(String chineseMeaning) {
+		this.chineseMeaning = chineseMeaning;
+	}
 	public void setDictId(Long dictId) {
 		this.dictId = dictId;
+	}
+	public Long getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
+	}
+	public Integer getSort() {
+		return sort;
+	}
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 	public Long getDictId() {
 		return dictId;

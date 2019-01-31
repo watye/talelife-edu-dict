@@ -1,9 +1,6 @@
 package com.talelife.edu.dict.web.vo;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 单词
@@ -13,51 +10,33 @@ import io.swagger.annotations.ApiModelProperty;
  * @date 2019-01-28 17:10:13
  */
 public class DictQuery implements Serializable{
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	@ApiModelProperty(value = "")
-	private Long dictId;
+	private static final long serialVersionUID = -1238583096482402543L;
+
 	/**
 	 * 单词
 	 */
-	@ApiModelProperty(value = "单词")
 	private String dictName;
-	/**
-	 * 美式发音地址
-	 */
-	@ApiModelProperty(value = "美式发音地址")
-	private String usaPronounceUrl;
-	/**
-	 * 英式发音地址
-	 */
-	@ApiModelProperty(value = "英式发音地址")
-	private String ukPronounceUrl;
 
-	public void setDictId(Long dictId) {
-		this.dictId = dictId;
-	}
-	public Long getDictId() {
-		return dictId;
-	}
-	public void setDictName(String dictName) {
-		this.dictName = dictName;
-	}
+	/**
+	 * 单词
+	 */
+	private Long courseId;
+
 	public String getDictName() {
 		return dictName;
 	}
-	public void setUsaPronounceUrl(String usaPronounceUrl) {
-		this.usaPronounceUrl = usaPronounceUrl;
+
+	public void setDictName(String dictName) {
+		this.dictName = dictName;
 	}
-	public String getUsaPronounceUrl() {
-		return usaPronounceUrl;
+
+	public Long getCourseId() {
+		return courseId;
 	}
-	public void setUkPronounceUrl(String ukPronounceUrl) {
-		this.ukPronounceUrl = ukPronounceUrl;
+
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
 	}
-	public String getUkPronounceUrl() {
-		return ukPronounceUrl;
-	}
+
 }

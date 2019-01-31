@@ -1,8 +1,8 @@
 package com.talelife.edu.dict.dao.entity;
 
+import java.util.List;
+
 import com.talelife.framework.entity.BaseEntity;
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 单词
@@ -12,8 +12,8 @@ import java.util.Date;
  * @date 2019-01-28 17:10:13
  */
 public class Dict extends BaseEntity {
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 8035716223711826027L;
 	/**
 	 * 
 	 */
@@ -23,6 +23,14 @@ public class Dict extends BaseEntity {
 	 */
 	private String dictName;
 	/**
+	 * 美式音标
+	 */
+	private String usaSoundmark;
+	/**
+	 * 英式音标
+	 */
+	private String ukSoundmark;
+	/**
 	 * 美式发音地址
 	 */
 	private String usaPronounceUrl;
@@ -30,6 +38,36 @@ public class Dict extends BaseEntity {
 	 * 英式发音地址
 	 */
 	private String ukPronounceUrl;
+	/**
+	 * 中文意思
+	 */
+	private String chineseMeaning;
+
+	private List<Long> dictIds;
+	
+	public String getUsaSoundmark() {
+		return usaSoundmark;
+	}
+
+	public void setUsaSoundmark(String usaSoundmark) {
+		this.usaSoundmark = usaSoundmark;
+	}
+
+	public String getUkSoundmark() {
+		return ukSoundmark;
+	}
+
+	public void setUkSoundmark(String ukSoundmark) {
+		this.ukSoundmark = ukSoundmark;
+	}
+
+	public String getChineseMeaning() {
+		return chineseMeaning;
+	}
+
+	public void setChineseMeaning(String chineseMeaning) {
+		this.chineseMeaning = chineseMeaning;
+	}
 
 	public void setDictId(Long dictId) {
 		this.dictId = dictId;
@@ -58,5 +96,13 @@ public class Dict extends BaseEntity {
 
 	public String getUkPronounceUrl() {
 		return ukPronounceUrl;
+	}
+
+	public List<Long> getDictIds() {
+		return dictIds;
+	}
+
+	public void setDictIds(List<Long> dictIds) {
+		this.dictIds = dictIds;
 	}
 }

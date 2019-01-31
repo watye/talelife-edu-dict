@@ -14,4 +14,6 @@ import com.talelife.edu.dict.dao.entity.CourseDict;
 @Mapper
 public interface CourseDictMapper extends CrudMapper<CourseDict> {
 	
+	int updateByDictId(CourseDict courseDict);
+	
 }

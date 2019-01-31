@@ -18,4 +18,9 @@ public class CourseDictWebServiceImpl extends CrudServiceImpl<CourseDict> implem
 	public CrudMapper<CourseDict> getDao() {
 		return this.mapper;
 	}
+
+	@Override
+	public boolean updateByDictId(CourseDict courseDict) {
+		return mapper.updateByDictId(courseDict)>0;
+	}
 }

@@ -1,12 +1,13 @@
 package com.talelife.edu.dict.web.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
 /**
  * 单词
  * 
@@ -20,9 +21,8 @@ public class DictAdd implements Serializable{
 	/**
 	 * 
 	 */
-	@NotNull(message = "不能为空")
-			@ApiModelProperty(value = "")
-	private Long dictId;
+	@NotNull(message = "课程不能为空")
+	private Long courseId;
 	/**
 	 * 单词
 	 */
@@ -30,6 +30,16 @@ public class DictAdd implements Serializable{
 	@Length(max = 50,message = "单词最大50个字符")
 	@ApiModelProperty(value = "单词")
 	private String dictName;
+	/**
+	 * 英式音标
+	 */
+	@NotBlank(message="英式音标不能为空")
+	private String ukSoundmark;
+	/**
+	 * 美式音标
+	 */
+	@NotBlank(message="美式音标不能为空")
+	private String usaSoundmark;
 	/**
 	 * 美式发音地址
 	 */
@@ -46,22 +56,28 @@ public class DictAdd implements Serializable{
 	private String ukPronounceUrl;
 
 	/**
-	 * 设置：
+	 * 序号
 	 */
-	public void setDictId(Long dictId) {
-		this.dictId = dictId;
-	}
+	@NotNull(message="序号不能为空")
+	private Integer sort;
+
 	/**
-	 * 获取：
+	 * 中文意思
 	 */
-	public Long getDictId() {
-		return dictId;
-	}
+	@NotBlank(message="中文意思不能为空")
+	private String chineseMeaning;
+	
 	/**
 	 * 设置：单词
 	 */
 	public void setDictName(String dictName) {
 		this.dictName = dictName;
+	}
+	public Long getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
 	}
 	/**
 	 * 获取：单词
@@ -92,5 +108,29 @@ public class DictAdd implements Serializable{
 	 */
 	public String getUkPronounceUrl() {
 		return ukPronounceUrl;
+	}
+	public String getUkSoundmark() {
+		return ukSoundmark;
+	}
+	public void setUkSoundmark(String ukSoundmark) {
+		this.ukSoundmark = ukSoundmark;
+	}
+	public String getUsaSoundmark() {
+		return usaSoundmark;
+	}
+	public void setUsaSoundmark(String usaSoundmark) {
+		this.usaSoundmark = usaSoundmark;
+	}
+	public Integer getSort() {
+		return sort;
+	}
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+	public String getChineseMeaning() {
+		return chineseMeaning;
+	}
+	public void setChineseMeaning(String chineseMeaning) {
+		this.chineseMeaning = chineseMeaning;
 	}
 }

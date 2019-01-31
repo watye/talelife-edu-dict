@@ -6,16 +6,22 @@
 	<resultMap id="resultMap" type="com.talelife.edu.dict.dao.entity.Dict">
         <result property="dictId" column="dict_id"/>
         <result property="dictName" column="dict_name"/>
+        <result property="usaSoundmark" column="usa_soundmark"/>
+        <result property="ukSoundmark" column="uk_soundmark"/>
         <result property="usaPronounceUrl" column="usa_pronounce_url"/>
         <result property="ukPronounceUrl" column="uk_pronounce_url"/>
+        <result property="chineseMeaning" column="chinese_meaning"/>
 	</resultMap>
 
   <sql id="baseColumns">
   	<trim suffixOverrides=","> 
         dict_id,
         dict_name,
+        usa_soundmark,
+        uk_soundmark,
         usa_pronounce_url,
         uk_pronounce_url,
+        chinese_meaning,
   	</trim>
   </sql>
   
@@ -23,14 +29,30 @@
 		<if test="dictId != null">
 			and dict_id = #{dictId}
 		</if>
-		<if test="dictName != null">
-			and dict_name = #{dictName}
+		<if test="dictName != null and dictName != ''">
+			<bind name="dictNameLike" value="'%'+_parameter.getDictName()+'%'"/>
+			and dict_name like #{dictNameLike}
+		</if>
+		<if test="usaSoundmark != null">
+			and usa_soundmark = #{usaSoundmark}
+		</if>
+		<if test="ukSoundmark != null">
+			and uk_soundmark = #{ukSoundmark}
 		</if>
 		<if test="usaPronounceUrl != null">
 			and usa_pronounce_url = #{usaPronounceUrl}
 		</if>
 		<if test="ukPronounceUrl != null">
 			and uk_pronounce_url = #{ukPronounceUrl}
+		</if>
+		<if test="chineseMeaning != null">
+			and chinese_meaning = #{chineseMeaning}
+		</if>
+		<if test="dictIds != null">
+			and dict_id in
+			<foreach collection="dictIds" item="item" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
 		</if>
   </sql>
   
@@ -65,7 +87,7 @@
          select count(1) from t_dict where 1=1 <include refid="whereSql"/>
       </select>
 
-      <insert id="save" parameterType="com.talelife.edu.dict.dao.entity.Dict">
+      <insert id="save" parameterType="com.talelife.edu.dict.dao.entity.Dict" useGeneratedKeys="true" keyProperty="dictId">
        insert into t_dict (
 		<trim suffixOverrides=","> 
 				<if test="dictId != null">
@@ -74,11 +96,20 @@
 				<if test="dictName != null">
 				dict_name,
 			</if>
+				<if test="usaSoundmark != null">
+				usa_soundmark,
+			</if>
+				<if test="ukSoundmark != null">
+				uk_soundmark,
+			</if>
 				<if test="usaPronounceUrl != null">
 				usa_pronounce_url,
 			</if>
 				<if test="ukPronounceUrl != null">
 				uk_pronounce_url,
+			</if>
+				<if test="chineseMeaning != null">
+				chinese_meaning,
 			</if>
 			</trim>
 		) values (
@@ -89,11 +120,20 @@
 				<if test="dictName != null">
 				#{dictName},
 			</if>
+				<if test="usaSoundmark != null">
+				#{usaSoundmark},
+			</if>
+				<if test="ukSoundmark != null">
+				#{ukSoundmark},
+			</if>
 				<if test="usaPronounceUrl != null">
 				#{usaPronounceUrl},
 			</if>
 				<if test="ukPronounceUrl != null">
 				#{ukPronounceUrl},
+			</if>
+				<if test="chineseMeaning != null">
+				#{chineseMeaning},
 			</if>
 			</trim>
 	)
@@ -105,11 +145,20 @@
 									<if test="dictName != null">
 				dict_name = #{dictName},
 			</if>
+									<if test="usaSoundmark != null">
+				usa_soundmark = #{usaSoundmark},
+			</if>
+									<if test="ukSoundmark != null">
+				uk_soundmark = #{ukSoundmark},
+			</if>
 								<if test="usaPronounceUrl != null">
 				usa_pronounce_url = #{usaPronounceUrl},
 			</if>
 								<if test="ukPronounceUrl != null">
 				uk_pronounce_url = #{ukPronounceUrl},
+			</if>
+								<if test="chineseMeaning != null">
+				chinese_meaning = #{chineseMeaning},
 			</if>
 					  </trim>
 			 where dict_id = #{dictId}
@@ -121,11 +170,20 @@
 									<if test="dictName != null">
 				dict_name = #{dictName},
 			</if>
+									<if test="usaSoundmark != null">
+				usa_soundmark = #{usaSoundmark},
+			</if>
+									<if test="ukSoundmark != null">
+				uk_soundmark = #{ukSoundmark},
+			</if>
 								<if test="usaPronounceUrl != null">
 				usa_pronounce_url = #{usaPronounceUrl},
 			</if>
 								<if test="ukPronounceUrl != null">
 				uk_pronounce_url = #{ukPronounceUrl},
+			</if>
+								<if test="chineseMeaning != null">
+				chinese_meaning = #{chineseMeaning},
 			</if>
 					  </trim>
 			 where dict_id in
